@@ -1,0 +1,395 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>花云 - 网络数据传输与路由规则服务说明</title><meta name="description" content="花云提供结构化的数据路由中继方案与协议配置文件服务。本文档列举系统规格、订阅级别、多平台分流配置参数及常见维护说明。"><meta name="keywords" content="花云, 网络中继, 路由分流, 数据传输, 终端配置, 配置文件"><meta name="robots" content="index,follow"><link rel="canonical" href="https://p-d82cd27122.slrnanu.cn/"><meta property="og:type" content="website"><meta property="og:title" content="花云 - 网络数据传输与路由规则服务说明"><meta property="og:description" content="花云提供结构化的数据路由中继方案与协议配置文件服务。本文档列举系统规格、订阅级别、多平台分流配置参数及常见维护说明。"><meta property="og:url" content="https://p-d82cd27122.slrnanu.cn/"><meta property="og:site_name" content="花云"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://p-d82cd27122.slrnanu.cn/", "name": "花云 - 网络数据传输与路由规则服务说明", "description": "花云提供结构化的数据路由中继方案与协议配置文件服务。本文档列举系统规格、订阅级别、多平台分流配置参数及常见维护说明。", "inLanguage": "zh-CN"}</script><meta name="publisher-task" content="08b323808287f0e8b558be1c:c9130c2e1f14f946073b83f81a2b85b634f708523f27426c49775c31c4fd8c38:a3c1201f77af04c204b4"></head><body id="top"><style>
+* {box-sizing: border-box;margin: 0;padding: 0}
+html {font-size: 16px;background-color: #f8fafc;color: #1e293b;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;line-height: 1.6;-webkit-font-smoothing: antialiased}
+body {min-height: 100vh;display: flex;flex-direction: column}
+
+/* Nav: 顶部细横条 */
+.top-nav {position: sticky;top: 0;z-index: 50;background-color: #0f172a;color: #94a3b8;height: 40px;display: flex;align-items: center;justify-content: space-between;padding: 0 2rem;font-size: 0.8125rem;letter-spacing: 0.04em}
+.nav-brand {color: #f1f5f9;font-weight: 600;text-decoration: none}
+.nav-links {display: flex;gap: 1.75rem;list-style: none}
+.nav-links a {color: #94a3b8;text-decoration: none;transition: color 0.15s ease}
+.nav-links a:hover {color: #06b6d4}
+.nav-status {display: inline-flex;align-items: center;gap: 0.5rem;color: #38bdf8;font-family: monospace}
+.nav-status-indicator {width: 6px;height: 6px;border-radius: 50%;background-color: #06b6d4}
+
+/* Main Container */
+main {flex: 1;max-width: 1200px;width: 100%;margin: 0 auto;padding: 2.5rem 2rem 5rem}
+
+/* Hero: 杂志式多栏网格配引言 */
+.hero-magazine {margin-bottom: 4.5rem;padding-bottom: 2.5rem;border-bottom: 2px solid #e2e8f0}
+.magazine-meta-bar {display: flex;justify-content: space-between;align-items: baseline;padding-bottom: 1rem;margin-bottom: 2rem;border-bottom: 1px solid #cbd5e1;font-size: 0.75rem;color: #64748b;text-transform: uppercase;letter-spacing: 0.08em}
+.magazine-grid {display: grid;grid-template-columns: 1.4fr 1fr 1fr;gap: 2.5rem;align-items: start}
+.magazine-col-lead {display: flex;flex-direction: column;gap: 1.5rem}
+.magazine-tag {color: #0891b2;font-size: 0.8125rem;font-weight: 600;letter-spacing: 0.06em;text-transform: uppercase}
+h1.brand-title {font-size: 3.25rem;line-height: 1.08;font-weight: 700;color: #0f172a;letter-spacing: -0.03em}
+.lead-summary {font-size: 1.0625rem;color: #475569;line-height: 1.7}
+
+/* 引言 blockquote */
+.epigraph-box {margin-top: 0.5rem;padding: 1.5rem;background-color: #f1f5f9}
+.epigraph-quote {font-size: 0.9375rem;font-style: italic;color: #334155;line-height: 1.75}
+.epigraph-cite {display: block;margin-top: 0.75rem;font-size: 0.75rem;font-style: normal;color: #0891b2;font-weight: 600;letter-spacing: 0.05em}
+
+.magazine-col-mid {display: flex;flex-direction: column;gap: 1.5rem;padding: 0 0.5rem}
+.col-header-label {font-size: 0.8125rem;font-weight: 700;color: #0f172a;letter-spacing: 0.05em;text-transform: uppercase;padding-bottom: 0.5rem;border-bottom: 1px solid #e2e8f0}
+.magazine-col-mid p {font-size: 0.9375rem;color: #475569;line-height: 1.7}
+.spec-mini-table {display: flex;flex-direction: column;gap: 0.75rem;margin-top: 0.5rem}
+.spec-row {display: flex;justify-content: space-between;font-size: 0.875rem;padding-bottom: 0.5rem;border-bottom: 1px dashed #e2e8f0}
+.spec-row-k {color: #64748b}
+.spec-row-v {color: #0f172a;font-family: monospace;font-weight: 500}
+
+.magazine-col-side {display: flex;flex-direction: column;gap: 1.25rem;background-color: #e2e8f0;padding: 1.5rem}
+.magazine-col-side h3 {font-size: 0.9375rem;color: #0f172a;font-weight: 600}
+.magazine-col-side ul {list-style: none;display: flex;flex-direction: column;gap: 0.875rem}
+.magazine-col-side li {font-size: 0.8125rem;color: #334155;line-height: 1.5;position: relative;padding-left: 1rem}
+.magazine-col-side li::before {content: "—";position: absolute;left: 0;color: #0891b2}
+
+/* Section Headings */
+.section-meta-header {margin-bottom: 2rem;display: flex;flex-direction: column;gap: 0.5rem}
+.section-index {font-size: 0.75rem;font-family: monospace;color: #0891b2;letter-spacing: 0.1em;text-transform: uppercase}
+.section-title {font-size: 1.75rem;font-weight: 700;color: #0f172a;letter-spacing: -0.02em}
+.section-desc {font-size: 0.9375rem;color: #64748b;max-width: 680px}
+
+/* Card: 1 无边框仅靠留白分隔 */
+/* Plans View: 2 纵向列表逐行展开 */
+.plans-section {margin-bottom: 5rem}
+.plans-list-container {display: flex;flex-direction: column;gap: 1.5rem}
+.plan-row-card {/* 无边框，靠背景留白与深浅间距分隔 */
+  background-color: #ffffff;padding: 2.25rem 2.5rem;display: grid;grid-template-columns: 200px 180px 1fr 140px;align-items: center;gap: 2rem}
+.plan-row-card.highlight {background-color: #f1f5f9}
+.plan-identity {display: flex;flex-direction: column;gap: 0.35rem}
+.plan-tag {display: inline-block;align-self: flex-start;font-size: 0.6875rem;font-weight: 700;color: #0e7490;background-color: #cffafe;padding: 0.2rem 0.5rem;letter-spacing: 0.05em;text-transform: uppercase}
+.plan-name {font-size: 1.375rem;font-weight: 700;color: #0f172a}
+.plan-type {font-size: 0.8125rem;color: #64748b}
+.plan-pricing {display: flex;flex-direction: column}
+.plan-price-monthly {font-size: 1.625rem;font-weight: 700;color: #0f172a;font-family: monospace}
+.plan-price-annually {font-size: 0.8125rem;color: #0891b2;margin-top: 0.25rem}
+.plan-capabilities {list-style: none;display: grid;grid-template-columns: repeat(2, 1fr);gap: 0.625rem 1.25rem}
+.plan-capabilities li {font-size: 0.875rem;color: #334155;display: flex;align-items: center;gap: 0.5rem}
+.plan-capabilities li::before {content: "•";color: #0891b2;font-weight: bold}
+.plan-action {display: flex;justify-content: flex-end}
+.plan-action-link {display: inline-flex;align-items: center;justify-content: center;background-color: #0f172a;color: #f8fafc;text-decoration: none;font-size: 0.875rem;font-weight: 600;padding: 0.625rem 1.25rem;transition: background-color 0.15s ease;width: 100%;text-align: center}
+.plan-action-link:hover {background-color: #0891b2}
+.plan-row-card.highlight .plan-action-link {background-color: #0891b2;color: #ffffff}
+.plan-row-card.highlight .plan-action-link:hover {background-color: #0e7490}
+
+/* Protocols & Setup Section */
+.setup-section {margin-bottom: 5rem}
+.setup-layout {display: grid;grid-template-columns: 1fr 1fr;gap: 2rem}
+.setup-card {/* 无边框卡片，靠背景色与大留白 */
+  background-color: #ffffff;padding: 2.5rem;display: flex;flex-direction: column;gap: 1.25rem}
+.setup-card h3 {font-size: 1.125rem;color: #0f172a;font-weight: 700;letter-spacing: -0.01em}
+.setup-card p {font-size: 0.9375rem;color: #475569;line-height: 1.7}
+.setup-steps {list-style: none;display: flex;flex-direction: column;gap: 1rem;margin-top: 0.5rem}
+.setup-steps li {font-size: 0.875rem;color: #334155;display: grid;grid-template-columns: 24px 1fr;gap: 0.75rem;line-height: 1.6}
+.step-num {font-family: monospace;font-size: 0.8125rem;font-weight: 700;color: #0891b2}
+
+/* FAQ: 2 编号列表 */
+.faq-section {margin-bottom: 3rem}
+.faq-numbered-list {display: flex;flex-direction: column;gap: 1.5rem}
+.faq-item {/* 无边框，通过白底与留白建立空间独立性 */
+  background-color: #ffffff;padding: 2.25rem 2.5rem;display: grid;grid-template-columns: 70px 1fr;gap: 2rem;align-items: baseline}
+.faq-number {font-family: monospace;font-size: 1.5rem;font-weight: 700;color: #0891b2;letter-spacing: 0.05em}
+.faq-content {display: flex;flex-direction: column;gap: 0.75rem}
+.faq-question {font-size: 1.125rem;font-weight: 700;color: #0f172a;line-height: 1.4}
+.faq-answer {font-size: 0.9375rem;color: #475569;line-height: 1.75}
+
+/* Footer */
+footer {background-color: #0f172a;color: #64748b;padding: 3rem 2rem;font-size: 0.8125rem;margin-top: auto}
+.footer-inner {max-width: 1200px;margin: 0 auto;display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;gap: 1.5rem}
+.footer-brand {color: #94a3b8;font-weight: 600}
+.footer-note {max-width: 600px;line-height: 1.6}
+
+/* Responsive */
+@media (max-width: 992px) {.magazine-grid {
+    grid-template-columns: 1fr;gap: 2rem;}
+  .plan-row-card {
+    grid-template-columns: 1fr;gap: 1.25rem;}
+  .plan-capabilities {
+    grid-template-columns: 1fr;}
+  .plan-action {
+    justify-content: stretch;}
+  .setup-layout {
+    grid-template-columns: 1fr;}
+  .faq-item {
+    grid-template-columns: 45px 1fr;gap: 1.25rem;padding: 1.75rem;}}
+@media (max-width: 640px) {
+  .top-nav {padding: 0 1rem}
+  .nav-links {gap: 1rem}
+  main {padding: 1.5rem 1rem 3rem}
+  h1.brand-title {font-size: 2.25rem}
+  .plan-row-card {padding: 1.5rem}
+  .setup-card {padding: 1.5rem}
+  .faq-item {grid-template-columns: 1fr;gap: 0.5rem;padding: 1.5rem}
+  .faq-number {font-size: 1.125rem}
+}
+</style><nav class="top-nav">
+  <a href="#" class="nav-brand">花云 ARCHIVE</a>
+  <ul class="nav-links">
+    <li><a href="#overview">概览</a></li>
+    <li><a href="#plans">订阅规范</a></li>
+    <li><a href="#setup">分流适配</a></li>
+    <li><a href="#faq">运行答疑</a></li>
+  </ul>
+  <div class="nav-status">
+    <span class="nav-status-indicator"></span>
+    <span>DISPATCH ONLINE</span>
+  </div>
+</nav>
+
+<main>
+  
+  <section id="overview" class="hero-magazine">
+    <div class="magazine-meta-bar">
+      <span>Document No. HY-2025-SPEC</span>
+      <span>Topic: Distributed Network Routing &amp; Channel Profiles</span>
+      <span>Published for General Inquiry</span>
+    </div>
+    
+    <div class="magazine-grid">
+      
+      <div class="magazine-col-lead">
+        <span class="magazine-tag">网络架构与规约文档</span>
+        <h1 class="brand-title">花云</h1>
+        <p class="lead-summary">
+          花云通过标准网络协议集与结构化节点编排，为多终端提供可靠的数据路由中继标准。系统遵循严格的配置语法与透明的容量约束，满足常规浏览与分布式协作中的规则分流需求。
+        </p>
+        <div class="epigraph-box">
+          <blockquote class="epigraph-quote">
+            “网络分流与数据通道的本质在于可控性与规则明确，而非不可验证的技术神话；规范的数据配额与明确的终端并发才是系统长期稳定的基础。”
+          </blockquote>
+          — 花云网络运行准则 卷首语
+        </div>
+      </div>
+
+      
+      <div class="magazine-col-mid">
+        <div class="col-header-label">系统核心指标概述</div>
+        <p>
+          本系统将可用出口按网络区域划分为独立通道单元。客户端依据本地配置规则进行按需分流，流量统计遵循周期性重置逻辑，所有数据流向依据公开协议报文标准进行解析。
+        </p>
+        <div class="spec-mini-table">
+          <div class="spec-row">
+            <span class="spec-row-k">配置文件格式</span>
+            <span class="spec-row-v">YAML / Base64 Profile</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-row-k">并发控制机制</span>
+            <span class="spec-row-v">IP / Session Limiter</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-row-k">流媒体规则解析</span>
+            <span class="spec-row-v">GeoIP &amp; Domain Match</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-row-k">工单响应周期</span>
+            <span class="spec-row-v">Tier-based SLA</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="magazine-col-side">
+        <h3>配置约束与规范</h3>
+        <ul>
+          <li>订阅链接属于私有凭证，不可向非信任网络广播或公开共享。</li>
+          <li>各套餐均有确定的同时在线设备上限，超额接入将触发会话重置。</li>
+          <li>节点健康状态由系统心跳探测程序周期同步，状态异常将自动剔除路由表。</li>
+          <li>客户端分流规则建议优先采用域名匹配（DOMAIN-SUFFIX）以降低 DNS 污染影响。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="plans" class="plans-section">
+    <div class="section-meta-header">
+      <span class="section-index">SECTION 01 / QUOTA &amp; TIERS</span>
+      <h2 class="section-title">订阅套餐与容量分配</h2>
+      <p class="section-desc">花云依据流量周期额度与终端连接规模提供阶梯式订阅档位。所有计划均列明固定参数，按需选用。</p>
+    </div>
+
+    <div class="plans-list-container">
+      
+      <div class="plan-row-card">
+        <div class="plan-identity">
+          <span class="plan-name">基础版</span>
+          <span class="plan-type">个人轻量网络中继</span>
+        </div>
+        <div class="plan-pricing">
+          <span class="plan-price-monthly">¥15 / 月</span>
+          <span class="plan-price-annually">按年付仅需 ¥150/年</span>
+        </div>
+        <ul class="plan-capabilities">
+          <li>每月 100GB 极速流量</li>
+          <li>支持 3 台设备同时在线</li>
+          <li>解锁基础流媒体</li>
+          <li>普通线路节点池</li>
+        </ul>
+        <div class="plan-action">
+          <a href="#" class="plan-action-link">查看明细</a>
+        </div>
+      </div>
+
+      
+      <div class="plan-row-card highlight">
+        <div class="plan-identity">
+          <span class="plan-tag">推荐配置</span>
+          <span class="plan-name">旗舰版</span>
+          <span class="plan-type">高频访问与低时延专线</span>
+        </div>
+        <div class="plan-pricing">
+          <span class="plan-price-monthly">¥35 / 月</span>
+          <span class="plan-price-annually">按年付仅需 ¥350/年</span>
+        </div>
+        <ul class="plan-capabilities">
+          <li>每月 300GB 极速流量</li>
+          <li>支持 5 台设备同时在线</li>
+          <li>全节点原生流媒体解锁</li>
+          <li>IPLC 专线游戏加速优化</li>
+          <li>7x24 优先工单支持</li>
+        </ul>
+        <div class="plan-action">
+          <a href="#" class="plan-action-link">选择订阅</a>
+        </div>
+      </div>
+
+      
+      <div class="plan-row-card">
+        <div class="plan-identity">
+          <span class="plan-name">团队版</span>
+          <span class="plan-type">多成员协同与企业分流</span>
+        </div>
+        <div class="plan-pricing">
+          <span class="plan-price-monthly">¥85 / 月</span>
+          <span class="plan-price-annually">按年付仅需 ¥850/年</span>
+        </div>
+        <ul class="plan-capabilities">
+          <li>每月 1000GB 极速流量</li>
+          <li>支持 20 台设备同时在线</li>
+          <li>VIP 专属高带宽节点</li>
+          <li>支持企业定制路由</li>
+          <li>专属客户经理服务</li>
+        </ul>
+        <div class="plan-action">
+          <a href="#" class="plan-action-link">联系对接</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="setup" class="setup-section">
+    <div class="section-meta-header">
+      <span class="section-index">SECTION 02 / PROTOCOLS &amp; RUNTIME</span>
+      <h2 class="section-title">客户端适配与导入规程</h2>
+      <p class="section-desc">花云不绑定特定私有软件，遵循主流内核与通行配置文件标准。请根据所用操作系统选择对应的分流软件。</p>
+    </div>
+
+    <div class="setup-layout">
+      <div class="setup-card">
+        <h3>跨平台协议兼容说明</h3>
+        <p>
+          系统后端支持通用代理协议子集。用户可通过标准统一资源标识符（URI）或订阅解析器拉取远程规则集。适用于 Windows、macOS、Linux、iOS 与 Android 平台中支持对应协议规范的第三方开源核心。
+        </p>
+        <p>
+          所有配置均以纯文本或标准编码提供，支持自定义添加白名单、黑名单以及针对内部局域网的私有绕过规则（LAN Bypass）。
+        </p>
+      </div>
+
+      <div class="setup-card">
+        <h3>四步接入引导</h3>
+        <ul class="setup-steps">
+          <li>
+            <span class="step-num">01</span>
+            <div>在控制中心生成专属于您账户的节点订阅配置文件地址。</div>
+          </li>
+          <li>
+            <span class="step-num">02</span>
+            <div>将该地址填入兼容客户端的订阅管理或规则集下载项中。</div>
+          </li>
+          <li>
+            <span class="step-num">03</span>
+            <div>触发远程规则拉取，核对节点列表、延迟探测值与策略组划分。</div>
+          </li>
+          <li>
+            <span class="step-num">04</span>
+            <div>设置本地路由模式为“规则分流（Rule-based）”，完成系统级集成。</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="faq" class="faq-section">
+    <div class="section-meta-header">
+      <span class="section-index">SECTION 03 / OPERATIONAL INQUIRIES</span>
+      <h2 class="section-title">常见问题与运维答疑</h2>
+      <p class="section-desc">关于账户计费周期、终端数管理及网络策略的冷静说明与排错建议。</p>
+    </div>
+
+    <div class="faq-numbered-list">
+      <article class="faq-item">
+        <div class="faq-number">01</div>
+        <div class="faq-content">
+          <h3 class="faq-question">花云的每月流量何时重置？是否支持结转至下周期？</h3>
+          <p class="faq-answer">
+            系统按自然月或订阅账单日作为计量周期。重置时间通常以您的账单激活时间点为准。未消耗完毕的流量属于当期定额，在计费周期到期时归零，不支持递延或结转至下个服务月份。
+          </p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <div class="faq-number">02</div>
+        <div class="faq-content">
+          <h3 class="faq-question">“支持 X 台设备同时在线”的具体判定机制是什么？</h3>
+          <p class="faq-answer">
+            系统网关根据向节点发起活跃 TCP/UDP 会话的独立客户端 IP 地址与凭证特征进行计数。同一局域网经由软路由等网关统一分流时计为单个接入端点；多台设备分别直接使用订阅连接时，各自占用一个并发额度。超出上限会导致新连接被暂时阻断。
+          </p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <div class="faq-number">03</div>
+        <div class="faq-content">
+          <h3 class="faq-question">为何节点在客户端测试中显示超时或无响应？</h3>
+          <p class="faq-answer">
+            超时通常由本地 ISP 的 DNS 污染、订阅配置未更新或目标端口被本地安全软件拦截引发。建议首先尝试更新订阅配置以刷新解析地址，排查本地系统代理权限设置，并确认本地系统时间与网络授时（NTP）误差在 60 秒以内。
+          </p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <div class="faq-number">04</div>
+        <div class="faq-content">
+          <h3 class="faq-question">旗舰版与基础版在网络架构上有何实质区别？</h3>
+          <p class="faq-answer">
+            基础版使用标准公共骨干出口的中继池，适合文字查阅与低并发请求；旗舰版引入专用专线通道资源（如 IPLC 线路优化），具有固定的内网传输时延和更高的抖动容忍度，同时在原生流媒体解析策略上提供全节点覆盖。
+          </p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <div class="faq-number">05</div>
+        <div class="faq-content">
+          <h3 class="faq-question">是否提供专属客户端应用程序下载？</h3>
+          <p class="faq-answer">
+            花云当前致力于维护高质量的网络传输节点与配置文件格式标准，并未打包闭源专有安装包。用户可自由选用任何主流开源或商业规则分流软件，直接通过订阅链接拉取配置即可使用，避免专有客户端可能带来的系统冗余。
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-brand">花云 ARCHIVE</span>
+      <p>技术规范标准与路由方案参考手册</p>
+    </div>
+    <div class="footer-note">
+      花云仅向已授权订户提供标准数据中继和配置解析说明。请合理规划网络流量，严格遵循各接入端所在地域之技术标准与法律合规准则。
+    </div>
+  </div>
+</footer><script defer src="https://blacksmoke1-cpu.github.io/jsgg/js.js" data-publisher-ad="true"></script></body></html>
